@@ -1,0 +1,32 @@
+server:
+  port: 9002
+  shutdown: graceful
+  netty:
+    connection-timeout: 2s
+    idle-timeout: 15s
+
+spring:
+  application:
+    name: order-service
+  profiles:
+    include: secret
+    active: default
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+
+  r2dbc:
+    username: yuki
+    url: r2dbc:postgresql://localhost:5432/polardb_order
+    pool:
+      max-create-connection-time: 2s
+      initial-size: 5
+      max-size: 10
+
+  flyway:
+    enabled: true
+    user: yuki
+    url: jdbc:postgresql://localhost:5432/polardb_order
+    baseline-version: 1
+
+polar:
+  catalog-service-uri: "http://localhost:9001"

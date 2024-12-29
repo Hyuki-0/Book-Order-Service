@@ -4,7 +4,7 @@ import com.yuki.webfluxorderserver.order.domain.entity.Order;
 import com.yuki.webfluxorderserver.order.domain.service.OrderService;
 import com.yuki.webfluxorderserver.order.web.dto.request.OrderRequest;
 import jakarta.validation.Valid;
-import java.time.Duration;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,14 +14,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/orders")
 public class OrderController {
 
   private final OrderService orderService;
-
-  public OrderController(OrderService orderService) {
-    this.orderService = orderService;
-  }
 
   @GetMapping
   public Flux<Order> getAllOrders() {
